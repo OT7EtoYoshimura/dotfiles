@@ -1,0 +1,60 @@
+# Disable history of preficed by a space
+setopt histignorespace
+
+# Enable colors and change prompt:
+autoload -U colors && colors	# Load colors
+#PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
+PS1='%F{green}%~%f %F{red}λ%f '
+
+# Automatically cd into typed directory.
+setopt autocd
+
+# auto documentation
+unalias run-help
+autoload run-help
+
+#stty stop undef		# Disable ctrl-s to freeze terminal.        also causes an annoying error message every time u open a terminal
+setopt interactive_comments
+
+# Load aliases and shortcuts if existent.
+#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc"
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/aliasrc"
+#[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+
+# Load xdg-dirs
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs" ] && source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
+
+# Basic auto/tab complete:
+autoload -U compinit && compinit -u
+zstyle ':completion:*' menu select
+# Auto complete with case insenstivity
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+zmodload zsh/complist
+autoload bashcompinit
+bashcompinit
+compinit
+_comp_options+=(globdots)		# Include hidden files.
+
+# Load syntax highlighting; should be last.
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+
+# https://github.com/zsh-users/zsh-autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh 2>/dev/null
+
+# fzf
+source /usr/share/fzf/key-bindings.zsh 2>/dev/null
+source /usr/share/fzf/completion.zsh 2>/dev/null
+
+source /usr/share/doc/find-the-command/ftc.zsh noprompt quiet
+
+source /usr/share/z.lua/z.lua.plugin.zsh
+export _ZL_DATA="${XDG_CACHE_HOME}/zlua"
+
+# eval $(thefuck --alias)
+
+# Use gpg-agent for ssh-authentication (https://wiki.archlinux.org/title/GnuPG#SSH_agent)
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi

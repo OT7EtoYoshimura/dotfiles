@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# This file runs when a DM logs you into a graphical session.
+# If you use startx/xinit like a Chad, this file will also be sourced.
+
+xrandr --dpi 96
+xset r rate 250 30
+setxkbmap -option 'lv3:ralt_switch'
+hsetroot -fill ~/other/wallpapers/thumb-1920-918742.jpg
+xrdb ${XDG_CONFIG_HOME}/x11/xresources & xrdbpid=$!
+
+autostart="mpd xcompmgr dunst redshift fcitx5"
+
+for program in $autostart; do
+	pidof -s "$program" || setsid -f "$program"
+done >/dev/null 2>&1
+
+# Ensure that xrdb has finished running before moving on to start the WM/DE.
+[ -n "$xrdbpid" ] && wait "$xrdbpid"
+
+setxkbmap -layout us,bg -variant ,phonetic -option grp:lalt_lshift_toggle,compose:menu
+[[ -f ${XDG_CONFIG_HOME}/x11/xmodmaprc ]] && xmodmap ${XDG_CONFIG_HOME}/x11/xmodmaprc
