@@ -6,10 +6,11 @@
 xrandr --dpi 96
 xset r rate 250 30
 setxkbmap -option 'lv3:ralt_switch'
-hsetroot -fill ~/other/wallpapers/thumb-1920-918742.jpg
+hsetroot -fill ~/imgs/wallpapers/phos.jpg
 xrdb ${XDG_CONFIG_HOME}/x11/xresources & xrdbpid=$!
+xinput set-prop 10 "libinput Tapping Enabled" 1
 
-autostart="mpd xcompmgr dunst redshift fcitx5"
+autostart="mpd xcompmgr dunst redshift" # fcitx5"
 
 for program in $autostart; do
 	pidof -s "$program" || setsid -f "$program"
@@ -19,4 +20,5 @@ done >/dev/null 2>&1
 [ -n "$xrdbpid" ] && wait "$xrdbpid"
 
 setxkbmap -layout us,bg -variant ,phonetic -option grp:lalt_lshift_toggle,compose:menu
+# setxkbmap -layout us,bg,gr,apl,pl,jp -variant ,phonetic,polytonic,,glagolica,kana86 -option grp:lalt_lshift_toggle,compose:menu
 [[ -f ${XDG_CONFIG_HOME}/x11/xmodmaprc ]] && xmodmap ${XDG_CONFIG_HOME}/x11/xmodmaprc

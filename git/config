@@ -1,0 +1,24 @@
+[init]
+	defaultBranch = main
+[diff]
+	external = difft
+[sendemail]
+	smtpServer = /usr/bin/msmtp
+	smtpEncryption = tls
+	smtpServer = mail.nomadalgia.xyz
+	smtpUser = hanabi@nomadalgia.xyz
+	smtpServerPort = 465
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[user]
+	signingkey = F969AA3C33F6A6039F08295D340871A79FF525D3
+	name = hanabi
+	email = hanabi@nomadalgia.xyz
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

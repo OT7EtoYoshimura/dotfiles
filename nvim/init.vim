@@ -4,6 +4,7 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'p00f/nvim-ts-rainbow'
+Plug 'jpe90/export-colorscheme.nvim'
 call plug#end()
 
 syntax on
@@ -61,26 +62,26 @@ set complete=.,w,b,u,t,i
 " set tags+=~/.local/share/tags/nuklear
 
 au BufReadPost *.smt set syntax=lisp
+digraph ll 8888 " ⊸
 
 " Snippets
-nnoremap <LEADER>tx :-1read $HOME/.config/nvim/.snippet.xhtml<CR>}4kzzwf>a
-nnoremap <LEADER>tc :-1read $HOME/.config/nvim/.snippet.c<CR>6jzzA
-nnoremap <LEADER>tms :-1read $HOME/.config/nvim/.snippet.ms<CR>:set syntax=groff<CR>2}zzi
-nnoremap <LEADER>tmk :-1read $HOME/.config/nvim/.snippet.mk<CR>12jA
+nnoremap <leader>tx :-1read $HOME/.config/nvim/.snippet.xhtml<cr>}4kzzwf>a
+nnoremap <leader>tc :-1read $HOME/.config/nvim/.snippet.c<cr>6jzzA
+nnoremap <leader>tms :-1read $HOME/.config/nvim/.snippet.ms<cr>:set syntax=groff<cr>11jzzi
+nnoremap <leader>tmk :-1read $HOME/.config/nvim/.snippet.mk<cr>12jA
 
-nnoremap <LEADER>w :w!<cr>
-nnoremap <LEADER>b :ls<cr>:b<Space>
-nnoremap <silent> <LEADER><space> :noh<cr>
+nnoremap <leader>w :w!<cr>
+nnoremap <leader>b :ls<cr>:b<space>
+nnoremap <silent> <leader><space> :noh<cr>
+nnoremap K f r<cr>
 nnoremap } }zz
 nnoremap { {zz
-nnoremap <C-b> <C-b>zz
-nnoremap <C-f> <C-f>zz
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-nnoremap <C-J> :s/\s\+/\r/<CR>
+nnoremap <c-b> <c-b>zz
+nnoremap <c-f> <c-f>zz
+nnoremap <c-h> <c-w>h
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-l> <c-w>l
 
 function! TreeSitterConf()
 lua << EOF
